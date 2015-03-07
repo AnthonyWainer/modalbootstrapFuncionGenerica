@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<button id="openModal" type="button" class="btn btn-primary">Abrir Modal</button>
+</body>
+</html>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<!--<script src="../sites/educazione_ebr/proyecto/media/js/jquery-2.1.0.min.js" ></script>-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+function PopUp(title, message, oktext, okfunction, canceltext, cancelfunction) {
+    var $myModal = $('#myModal');
+    $('#myModal .modal-title').html(!title ? '<br />' : title);
+    $('#myModal .modal-body').html(!message ? '' : message);
+    var $myModalFooter = $('#myModal .modal-footer').empty();
+    if (canceltext) {
+        if (!(typeof cancelfunction === 'function')) {
+            cancelfunction = function () {
+                $myModal.modal('hide');
+            };
+        }
+        $myModalFooter.append('<button id="cancelfunction" type="button" class="btn btn-default">' + canceltext + '</button>');
+        $('#cancelfunction').on('click', function () {
+            cancelfunction();
+            return false;
+        });
+    }
+    if (oktext) {
+        if (!(typeof okfunction === 'function')) {
+            okfunction = function () {
+                $myModal.modal('hide');
+            };
+        }
+        $myModalFooter.append('<button id="okfunction" type="button" class="btn btn-primary">' + oktext + '</button>');
+        $('#okfunction').on('click', function () {
+            okfunction();
+            return false;
+        });
+    }
+    $myModal.modal('show');
+}
+$('#openModal').on('click', function () {
+    PopUp('Título de Ejemplo', '<p>Mensaje de Ejemplo</p>', 'Aceptar', function () {
+        alert('aceptar!');
+        $('#myModal').modal('hide');
+    }, 'Cancelar');
+    return false;
+});
+</script>
